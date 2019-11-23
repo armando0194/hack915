@@ -1,0 +1,35 @@
+<script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v1/initialize.js'></script>
+<body>
+
+<div id="container-fastlink">
+	<div style="text-align: center;">
+   <input type="submit" id="btn-fastlink" value="Link an Account">
+</div>
+</div>
+
+<script>
+	(function (window) {
+					//Open FastLink
+					var fastlinkBtn = document.getElementById('btn-fastlink');
+					fastlinkBtn.addEventListener('click', function () {
+							window.fastlink.open({
+									fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',
+									jwtToken: 'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ0ODA3OTMsImV4cCI6MTU3NDQ4MjU5Mywic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.sC0E6HYOS6sj2_wRrcOUSzEMEHxwz2XxdwPFN3fqUZaoz7Aw9x7QE2COQATTjIiZNlaRwExbOpaDkZOtnMumxavwDDa6OjlUHIxdkg1fOPpaCXq8Uvfr0ECdcPHv6lMK7eBWED-FjzGaCdEIuGqVLNDAwxpUjGO6Z1tyKHXp8FNfzhYhTrhRzpUsvNRvDac2LMmvvk2ACzFv486HtkoCoHDypgTHX3OlWS9pptgkxTQ1UKahseaMUqpIMWeiJBfsj8Vttm43dudMUgii4S4jKavMRt8nJ4Pk6wQ0vvBCYXY8nyzVda5CvhJhhHLXwQGWEGbpOHaZPFYn1iEUgjJgow',
+									//params: '<optParams>',
+									onSuccess: function (data) {
+											console.log(data);
+									},
+									onError: function (data) {
+											console.log(data);
+									},
+									onExit: function (data) {
+											console.log(data);
+									},
+									onEvent: function (data) {
+											console.log(data);
+									}
+							}, 'container-fastlink');
+					}, false);
+			}(window));
+	</script>
+</body>

@@ -14,8 +14,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Accounts',
+
     icon: 'briefcase-outline',
-    link: '/pages/account',
+    link: '/pages/tables/tree-grid',
   },
   {
     title: 'Expenses',

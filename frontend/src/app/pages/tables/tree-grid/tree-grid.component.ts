@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,OnInit, Renderer2,Inject } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { DOCUMENT } from '@angular/common';
 
 interface TreeNode<T> {
   data: T;
@@ -8,10 +9,12 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  name: string;
-  size: string;
-  kind: string;
-  items?: number;
+  
+  Account: string;
+  balance?: string;
+  due?: string;
+  payment? :string;
+  kind?:string;
 }
 
 @Component({
@@ -20,8 +23,8 @@ interface FSEntry {
   styleUrls: ['./tree-grid.component.scss'],
 })
 export class TreeGridComponent {
-  customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
+  customColumn = 'Account';
+  defaultColumns = [ 'balance', 'due', 'payment' ];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
   dataSource: NbTreeGridDataSource<FSEntry>;
@@ -29,9 +32,10 @@ export class TreeGridComponent {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
+  constructor(private renderer2: Renderer2,private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,@Inject(DOCUMENT) private _document) {
     this.dataSource = this.dataSourceBuilder.create(this.data);
   }
+
 
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -47,28 +51,22 @@ export class TreeGridComponent {
 
   private data: TreeNode<FSEntry>[] = [
     {
-      data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
+      data: { Account : 'Credit',   kind: 'dir' },
       children: [
-        { data: { name: 'project-1.doc', kind: 'doc', size: '240 KB' } },
-        { data: { name: 'project-2.doc', kind: 'doc', size: '290 KB' } },
-        { data: { name: 'project-3', kind: 'txt', size: '466 KB' } },
-        { data: { name: 'project-4.docx', kind: 'docx', size: '900 KB' } },
+        { data: { Account: 'project-1.doc', balance: 'doc', due: '240 KB',payment:'2' } },
+        { data: { Account: 'project-2.doc', balance: 'doc', due: '290 KB',payment:'2' } },
+        { data: { Account: 'project-3', balance: 'txt', due: '466 KB',payment:'2' } },
+        { data: { Account: 'project-4.docx', balance: 'docx', due: '900 KB',payment:'2' } },
       ],
     },
     {
-      data: { name: 'Reports', kind: 'dir', size: '400 KB', items: 2 },
+      data: { Account: 'Debit',   kind:'dir'},
       children: [
-        { data: { name: 'Report 1', kind: 'doc', size: '100 KB' } },
-        { data: { name: 'Report 2', kind: 'doc', size: '300 KB' } },
+        { data: { Account: 'Report 1', balance: 'doc', due: '100 KB',payment:'2' } },
+        { data: { Account: 'Report 2', balance: 'doc', due: '300 KB',payment:'2' } },
       ],
     },
-    {
-      data: { name: 'Other', kind: 'dir', size: '109 MB', items: 2 },
-      children: [
-        { data: { name: 'backup.bkp', kind: 'bkp', size: '107 MB' } },
-        { data: { name: 'secret-note.txt', kind: 'txt', size: '2 MB' } },
-      ],
-    },
+    
   ];
 
   getShowOn(index: number) {
@@ -76,6 +74,50 @@ export class TreeGridComponent {
     const nextColumnStep = 100;
     return minWithForMultipleColumns + (nextColumnStep * index);
   }
+
+   ngOnInit(){
+    const s = this.renderer2.createElement('script');
+    s.type = 'text/javascript';
+    s.onload = this.loadNextScript.bind(this);
+    s.src = 'https://cdn.yodlee.com/fastlink/v1/initialize.js';
+    s.text = ``;
+    this.renderer2.appendChild(this._document.body, s);
+    
+        
+  }
+
+
+  loadNextScript(){
+    const s = this.renderer2.createElement('script');
+    s.text = "(function (window) {var fastlinkBtn = document.getElementById('btn-fastlink');fastlinkBtn.addEventListener('click', function () {console.log('here');window.fastlink.open({fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',jwtToken: 'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1NDgzMjEsImV4cCI6MTU3NDU1MDEyMSwic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.nitdsnKFKwvFdx4s8OPy0AsBQS9u4GWXsgieZLzejKdHNV0raIZFpazDFOvg15rEBfQ6EktBuQz75rm_MYuuTbj54ln75Nk1DGfScfULkXC1XdXSi4XPrRF8ATr_O9NoEBT6F0nNlFqU0KucfboKEHzsl6DP9ilS-AIntBvoiBvUiM_3zCBwVxixTKWCBT8G1gcGX-lvbAHOftuQ8NmYHgXTnvAzhwbxIvIll3bo8vyN2F8jNc95A619tEUAqtnTOMM1ADNB5nYMBehw-GCl9GAs7_mfkw060YCZZRb6ynYUEzD3HJ6lKuL1a8m2_vpKF6qX1eMaez2DWYlK3XLc5g',onSuccess: function (data) {console.log(data);},onError: function (data) {console.log(data);},onExit: function (data) {console.log(data);},onEvent: function (data) {console.log(data);}}, 'container-fastlink');}, false);}(window));";
+    this.renderer2.appendChild(this._document.body, s);
+  }
+
+  updateData(){
+    this.data = [
+      {
+        data: { Account : 'Credit',   kind: 'dir' },
+        children: [
+          { data: { Account: 'project-1.doc', balance: 'doc', due: '240 KB',payment:'2' } },
+         
+        ],
+      },
+      {
+        data: { Account: 'Debit',   kind:'dir'},
+        children: [
+          { data: { Account: 'Report 1', balance: 'doc', due: '100 KB',payment:'2' } },
+         
+        ],
+      },
+      
+    ];
+    this.dataSource = this.dataSourceBuilder.create(this.data);
+ 
+   
+    
+  }
+
+  
 }
 
 @Component({
@@ -96,3 +138,24 @@ export class FsIconComponent {
     return this.kind === 'dir';
   }
 }
+
+
+
+//////
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+
+  
+
+

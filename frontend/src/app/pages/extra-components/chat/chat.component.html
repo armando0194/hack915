@@ -1,39 +1,105 @@
 <nb-card>
   <nb-card-header>
-    <p class="chart-description">Here's a complete example build in a bot-like app. Type <code>help</code> to be able to receive different message types.
-      Enjoy the conversation and the beautiful UI.</p>
+    
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+        
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+          padding: 16px 20px;
+          cursor: pointer;
+          position: fixed;
+          bottom:70px;
+          right: 20px;
+          width: 90px;
+          height: 80px;
+        }
+        
+        /* The popup chat - hidden by default */
+        .chat-popup {
+          display: none;
+          position: fixed;
+          bottom: 0;
+          right: 15px;
+          z-index: 9;
+        }
+        
+        /* Add styles to the form container */
+        .form-container {
+          max-width: 300px;
+          padding: 10px;
+          background-color: white;
+        }
+        
+        /* Full-width textarea */
+        .form-container textarea {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          border: none;
+          background: #f1f1f1;
+          resize: none;
+          min-height: 200px;
+        }
+        
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+          background-color: #ddd;
+          outline: none;
+        }
+        
+        /* Set a style for the submit/send button */
+        .form-container .btn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 16px 20px;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          margin-bottom:10px;
+          opacity: 0.8;
+        }
+        
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+          background-color: red;
+        }
+        
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+          opacity: 1;
+        }
+        </style>
   </nb-card-header>
   <nb-card-body>
-    <div class="row">
-      <div class="chat-container col-md-12 col-lg-6 col-xxxl-6">
-        <nb-chat title="Nebular Conversational UI" size="large" status="primary">
-          <nb-chat-message *ngFor="let msg of messages"
-                           [type]="msg.type"
-                           [message]="msg.text"
-                           [reply]="msg.reply"
-                           [sender]="msg.user.name"
-                           [date]="msg.date"
-                           [files]="msg.files"
-                           [quote]="msg.quote"
-                           [latitude]="msg.latitude"
-                           [longitude]="msg.longitude"
-                           [avatar]="msg.user.avatar">
-          </nb-chat-message>
-          <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
-          </nb-chat-form>
-        </nb-chat>
-      </div>
-      <div class="chat-container col-md-12 col-lg-6 col-xxxl-6">
-        <div class="chart-features">
-          <p>Main features:</p>
-          <ul>
-            <li>different message types support (text, image, file, file group, map, etc)</li>
-            <li>drag &amp; drop for images and files with preview</li>
-            <li>different UI styles</li>
-            <li>custom action buttons (coming soon)</li>
-          </ul>
+  
+    <div>
+      <!-- <img class="open-button" src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif" (click)="toggleChat()"> -->
+      <!-- <div class="chat-popup" id="myForm" [style.display]="chatDisplay"> -->
+        <div class="chat-container col-md-12 col-lg-6 col-xxxl-6">
+          <nb-chat title="Your financial advisor" size="large" status="primary">
+            <nb-chat-message *ngFor="let msg of messages"
+                            [type]="msg.type"
+                            [message]="msg.text"
+                            [reply]="msg.reply"
+                            [sender]="msg.user.name"
+                            [date]="msg.date"
+                            [files]="msg.files"
+                            [quote]="msg.quote"
+                            [latitude]="msg.latitude"
+                            [longitude]="msg.longitude"
+                            [avatar]="msg.user.avatar">
+            </nb-chat-message>
+            <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+            </nb-chat-form>
+          </nb-chat>
         </div>
-      </div>
+      <!-- </div>     -->
+      
     </div>
+
+ 
   </nb-card-body>
 </nb-card>

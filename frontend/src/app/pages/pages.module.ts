@@ -21,6 +21,7 @@ import { AccountComponent } from './account/account.component';
   declarations: [
     PagesComponent,
     AccountComponent,
+    
   ],
 })
 export class PagesModule {

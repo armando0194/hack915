@@ -1,7 +1,7 @@
 <nb-card size="giant">
 
   <nb-card-header>
-    Security Cameras
+    Scholarships and Loans Options
 
     <button class="single-view-button"
             nbButton
@@ -22,9 +22,11 @@
   <div class="grid-container">
 
     <div class="single-view" *ngIf="isSingleView">
-      <div class="camera" [style.background-image]="'url(' + selectedCamera.source + ')'">
-        <span class="camera-name">{{ selectedCamera.title }}</span>
-      </div>
+      <a [href]="selectedCamera.url" target="_blank">
+        <div class="camera" [style.background-image]="'url(' + selectedCamera.source + ')'">
+            <span class="camera-name">{{ selectedCamera.description }}</span>
+        </div>
+      </a>
     </div>
 
     <div class="grid-view" *ngIf="!isSingleView">

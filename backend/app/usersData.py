@@ -117,7 +117,7 @@ def update_user(user_id):
             return str(ex), 400
 
         # Updating the user
-        records_updated = collection.update_one({"id": int(user_id)}, body)
+        records_updated = collection.replace_one({"id": int(user_id)}, body)
 
         # Check if resource is updated
         if records_updated.modified_count > 0:

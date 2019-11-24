@@ -4,6 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import { TrafficList } from '../../../../@core/data/traffic-list';
 
+
 @Component({
   selector: 'ngx-traffic-front-card',
   styleUrls: ['./traffic-front-card.component.scss'],
@@ -23,6 +24,7 @@ export class TrafficFrontCardComponent implements OnDestroy {
       .subscribe(theme => {
         this.currentTheme = theme.name;
     });
+
   }
 
   trackByDate(_, item) {

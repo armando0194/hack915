@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
+
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -15,8 +16,18 @@ const routes: Routes = [{
       component: ECommerceComponent,
     },
     {
-      path: 'iot-dashboard',
+      path: 'offers',
       component: DashboardComponent,
+    },
+    {
+      path: 'account',
+      loadChildren: () => import('./tables/tables.module')
+      .then(m => m.TablesModule),
+    },
+    {
+      path: 'expenses',
+      loadChildren: () => import('./tables/tables.module')
+        .then(m => m.TablesModule),
     },
     {
       path: 'layout',

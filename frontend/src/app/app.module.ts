@@ -20,6 +20,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { PortalModule } from '@angular/cdk/portal';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,7 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    PortalModule,
 
     ThemeModule.forRoot(),
 

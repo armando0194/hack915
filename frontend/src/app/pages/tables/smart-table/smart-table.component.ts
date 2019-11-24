@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { SmartTableData } from '../../../@core/data/smart-table';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-smart-table',
@@ -26,38 +27,26 @@ export class SmartTableComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
+
+      title: {
+        title: 'Title',
+        type: 'string',
+      },
+        amount: {
+        title: 'Amount',
         type: 'number',
       },
-      firstName: {
-        title: 'First Name',
+      category: {
+        title: 'Category',
         type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
-      },
+      }
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+    this.service.getData().subscribe(res => {this.source.load(res[0]['expenses']);});
   }
 
   onDeleteConfirm(event): void {

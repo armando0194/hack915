@@ -7,8 +7,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { AccountComponent } from './account/account.component';
-import { SingleAccountComponent } from './account/single-account/single-account.component';
 
 @NgModule({
   imports: [

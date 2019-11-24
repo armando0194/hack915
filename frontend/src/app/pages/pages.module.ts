@@ -21,8 +21,6 @@ import { SingleAccountComponent } from './account/single-account/single-account.
   ],
   declarations: [
     PagesComponent,
-    AccountComponent,
-    SingleAccountComponent,
   ],
 })
 export class PagesModule {

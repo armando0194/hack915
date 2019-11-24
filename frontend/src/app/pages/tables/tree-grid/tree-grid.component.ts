@@ -1,6 +1,7 @@
 import { Component, Input,OnInit, Renderer2,Inject } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { DOCUMENT } from '@angular/common';
+import { SmartTableData } from '../../../@core/data/smart-table';
 
 interface TreeNode<T> {
   data: T;
@@ -32,9 +33,10 @@ export class TreeGridComponent {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  constructor(private renderer2: Renderer2,private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,@Inject(DOCUMENT) private _document) {
+  constructor(private renderer2: Renderer2,private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,@Inject(DOCUMENT) private _document, private service: SmartTableData) {
     this.dataSource = this.dataSourceBuilder.create(this.data);
   }
+  
 
 
   updateSort(sortRequest: NbSortRequest): void {
@@ -53,17 +55,13 @@ export class TreeGridComponent {
     {
       data: { Account : 'Credit',   kind: 'dir' },
       children: [
-        { data: { Account: 'project-1.doc', balance: 'doc', due: '240 KB',payment:'2' } },
-        { data: { Account: 'project-2.doc', balance: 'doc', due: '290 KB',payment:'2' } },
-        { data: { Account: 'project-3', balance: 'txt', due: '466 KB',payment:'2' } },
-        { data: { Account: 'project-4.docx', balance: 'docx', due: '900 KB',payment:'2' } },
+      
       ],
     },
     {
       data: { Account: 'Debit',   kind:'dir'},
       children: [
-        { data: { Account: 'Report 1', balance: 'doc', due: '100 KB',payment:'2' } },
-        { data: { Account: 'Report 2', balance: 'doc', due: '300 KB',payment:'2' } },
+     
       ],
     },
     
@@ -81,16 +79,18 @@ export class TreeGridComponent {
     s.onload = this.loadNextScript.bind(this);
     s.src = 'https://cdn.yodlee.com/fastlink/v1/initialize.js';
     s.text = ``;
-    this.renderer2.appendChild(this._document.body, s);
-    
-        
+    this.renderer2.appendChild(this._document.body, s); 
+
+
   }
 
 
   loadNextScript(){
     const s = this.renderer2.createElement('script');
-    s.text = "(function (window) {var fastlinkBtn = document.getElementById('btn-fastlink');fastlinkBtn.addEventListener('click', function () {console.log('here');window.fastlink.open({fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',jwtToken: 'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1NDgzMjEsImV4cCI6MTU3NDU1MDEyMSwic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.nitdsnKFKwvFdx4s8OPy0AsBQS9u4GWXsgieZLzejKdHNV0raIZFpazDFOvg15rEBfQ6EktBuQz75rm_MYuuTbj54ln75Nk1DGfScfULkXC1XdXSi4XPrRF8ATr_O9NoEBT6F0nNlFqU0KucfboKEHzsl6DP9ilS-AIntBvoiBvUiM_3zCBwVxixTKWCBT8G1gcGX-lvbAHOftuQ8NmYHgXTnvAzhwbxIvIll3bo8vyN2F8jNc95A619tEUAqtnTOMM1ADNB5nYMBehw-GCl9GAs7_mfkw060YCZZRb6ynYUEzD3HJ6lKuL1a8m2_vpKF6qX1eMaez2DWYlK3XLc5g',onSuccess: function (data) {console.log(data);},onError: function (data) {console.log(data);},onExit: function (data) {console.log(data);},onEvent: function (data) {console.log(data);}}, 'container-fastlink');}, false);}(window));";
+    let token = "eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1NjgzMjgsImV4cCI6MTU3NDU3MDEyOCwic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.OzrZKlKwWsl10l1YU8dawTLTrKAyQEN1cmPu_zYnwMFy_0b_5sHPox_ZYRahIgZh0txceY1AKzLw30nuhKwWlvA6g9gzlkP8goOltl56JDyhwQab17Yod_tCcNQZEbm1DjBXAipKeOTfTLCKbMJ4ShqgiM7J-SFd3fBe1PsFhTTaSpAiKt67_dZst_Oxuf7cZjQES0wVnzp3KZGekhCreJOvauGGKyniJ7RtZYBCpI9drGiEg9YMSYI3hOmZN7B9Y1UjJ-p4O_CTtJKzrx6sMvIPGBk1Gw6p0fJ3tBbWAqnszdov32bvvfM7Y0ADIUNCO4Ou4rTzaHNCyGZsqwffZg";
+    s.text = "(function (window) {var fastlinkBtn = document.getElementById('btn-fastlink');fastlinkBtn.addEventListener('click', function () {console.log('here');window.fastlink.open({fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',jwtToken: 'Bearer "+token+"',onSuccess: function (data) {console.log(data);},onError: function (data) {console.log(data);},onExit: function (data) {console.log(data);},onEvent: function (data) {console.log(data);}}, 'container-fastlink');}, false);}(window));";
     this.renderer2.appendChild(this._document.body, s);
+    
   }
 
   updateData(){
@@ -98,20 +98,44 @@ export class TreeGridComponent {
       {
         data: { Account : 'Credit',   kind: 'dir' },
         children: [
-          { data: { Account: 'project-1.doc', balance: 'doc', due: '240 KB',payment:'2' } },
+          // { data: { Account: 'project-1.doc', balance: 'doc', due: '240 KB',payment:'2' } },
          
         ],
       },
       {
         data: { Account: 'Debit',   kind:'dir'},
         children: [
-          { data: { Account: 'Report 1', balance: 'doc', due: '100 KB',payment:'2' } },
+          // { data: { Account: 'Report 1', balance: 'doc', due: '100 KB',payment:'2' } },
          
         ],
-      },
-      
+      },      
     ];
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+
+
+    this.service.getAccount().subscribe(res => {
+
+      for (let i =0; i < res['account'].length; i ++){
+        console.log(res['account'][i]);
+        if (res['account'][i]['accountType'] == 'CREDIT' || res['account'][i]['accountType'] == 'OTHER'){
+          console.log("here");
+          let ob_data = {data: { Account: res['account'][i]['accountName'], balance: res['account'][i]['availableCredit']['amount'], due: res['account'][i]['dueDate'],payment:res['account'][i]['lastPaymentAmount']['amount'] } };
+            console.log(ob_data);
+          this.data[0]['children'].push( ob_data);
+        }
+        else {
+          let ob_data = {data: { Account: res['account'][i]['accountName'], balance: res['account'][i]['availableBalance']['amount'], due: "",payment:"" } };
+          
+          this.data[1]['children'].push( ob_data);
+        }
+      }
+
+      this.dataSource = this.dataSourceBuilder.create(this.data);
+      // res.forEach(element => {
+      //   
+      // });
+      
+    });
+    // this.dataSource = this.dataSourceBuilder.create(this.data);
  
    
     

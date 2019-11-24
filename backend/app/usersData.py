@@ -111,10 +111,10 @@ def update_user(user_id):
         # Get the value which needs to be updated
         try:
             body = ast.literal_eval(json.dumps(request.get_json()))
-        except:
+        except Exception as ex:
             # Bad request as the request body is not available
             # Add message for debugging purpose
-            return "", 400
+            return str(ex), 400
 
         # Updating the user
         records_updated = collection.update_one({"id": int(user_id)}, body)
@@ -127,10 +127,10 @@ def update_user(user_id):
             # Bad request as the resource is not available to update
             # Add message for debugging purpose
             return "", 404
-    except:
+    except Exception as ex2:
         # Error while trying to update the resource
         # Add message for debugging purpose
-        return "", 500
+        return str(ex2), 500
 
 
 @app.route("/api/v1/users/<user_id>", methods=['DELETE'])

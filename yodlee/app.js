@@ -1,13 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const paramRoutes = require("./routes/parameters");
-const outRoutes = require("./routes/outputs");
-const modelRoutes = require("./routes/models");
-const acronymRoutes = require("./routes/acronyms");
-const themeRoutes = require("./routes/themes");
-const setRoutes = require("./routes/sets");
-const authRoutes = require("./swim-auth-api/routes/api")(passport);
 const yodleeRoutes = require("./yodlee-api/routes/api")(passport);
 
 // 1: NPM dependencies.
@@ -47,16 +40,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//swim-api routes
-app.use("/swim-api/parameters", paramRoutes);
-app.use("/swim-api/outputs", outRoutes);
-app.use("/swim-api/model-catalog", modelRoutes);
-app.use("/swim-api/acronyms", acronymRoutes);
-app.use("/swim-api/themes", themeRoutes);
-app.use("/swim-api/sets", setRoutes);
 
-// // swim-auth API routes.
-app.use("/swim-auth-api", authRoutes);
 // logger API routes
 app.use("/yodlee-api", yodleeRoutes);
 

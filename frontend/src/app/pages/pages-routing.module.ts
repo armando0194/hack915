@@ -21,7 +21,8 @@ const routes: Routes = [{
     },
     {
       path: 'account',
-      component: AccountComponent,
+      loadChildren: () => import('./tables/tables.module')
+      .then(m => m.TablesModule),
     },
     {
       path: 'layout',

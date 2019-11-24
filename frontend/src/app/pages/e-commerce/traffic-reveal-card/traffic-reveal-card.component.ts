@@ -45,12 +45,11 @@ export class TrafficRevealCardComponent implements OnDestroy {
 
   getTrafficFrontCardData(period: string) {
     this.service.getTransactions().subscribe(res => {
-      console.log("hola");
-      console.log(res['transaction']);
+  
       
       this.trafficListData = [];
       for (let i =0; i < res['transaction'].length; i ++){
-          console.log(res['transaction'][i]['categoryType']);
+         
           let tra;
           if (res['transaction'][i]['categoryType'] != 'TRANSFER')
           {

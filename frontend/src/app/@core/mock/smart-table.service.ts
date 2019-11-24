@@ -44,27 +44,29 @@ export class SmartTableService extends SmartTableData {
     amount: '1000',
     category: 'Housing',
   }];
+
+
   constructor(private httpClient: HttpClient){
     super();
   }
 
   getData() {
-    return this.httpClient.get('http://172.20.20.26:5000/api/v1/users');
+    return this.httpClient.get('http://172.20.44.4:5000/api/v1/users');
   }
 
   getAccount(){
     return this.httpClient.get('https://sandbox.api.yodlee.com/ysl/accounts', {
-      headers: {'Api-Version':'1.1','Authorization':'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1NzQwNDcsImV4cCI6MTU3NDU3NTg0Nywic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.ANVjiaZejbHhmfLZyWz1L5YCezQR3q6ASmUzAVD264WuN23A1Xp1dmIGAoyvaFbbcVkd1UnZYclyEhRY6quNy1Vx6QcbIuvdkrQrWnFmfMf05A-sWXw_ZCs1Ugc2IOfp2CjwnO917D1EkgxIl39ekIjll5RtSqzwi7SKy2-Yc4emTrMpjOTjwFbrY8wFtSY84LHeJgwfDVU26fDxNtI7oWWC63HUMZcsihQpBYLAgTk4DiD35VeM2ZaQjNH3cLcypLhgpC9FcLbm8N1c78PXITF8ctPZNrVh7PlU9DyqxTbBk4UFfod34RMHYc1h56S0N9OUeLgevqLUdys6UsZ5qg'}
+      headers: {'Api-Version':'1.1','Authorization':'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1Nzg2NzYsImV4cCI6MTU3NDU4MDQ3Niwic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.gsO5IB0Gf62fzY6DRIqaxtmMswdF4T_cAXT-CZe1rqVOwbd9rjtK6IEqPBxsEOc4D4Nn5kIjknTR_Wljn3HiDRWr633mjVVt8leY00NVUIi_FAIZpL6IlEq16W2Z6lYS7TBkQRgWHWT5KR9YNUi38kE1MGK1b8mZ4KQ7OAaBCOtFo1DFZP163FqMJx_XlUzm0_mvyMxdRTnw7_Me4vJ2KpHUJwKJpCP1leK0VKMwhLtOmipOfE9yJCOCYvPB0bdEKr_5zjOHij--H0VahaDxklSm4DG5Sg-eW78A2QZwIxpAqPH4nX_jY9F62w7hI49Z2ExNwbPAYDsqQktxKEn-qQ'}
    });
   }
 
   getTransactions(){
     return this.httpClient.get('https://sandbox.api.yodlee.com/ysl/transactions', {
-      headers: {'Api-Version':'1.1','Authorization':'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1NzQwNDcsImV4cCI6MTU3NDU3NTg0Nywic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.ANVjiaZejbHhmfLZyWz1L5YCezQR3q6ASmUzAVD264WuN23A1Xp1dmIGAoyvaFbbcVkd1UnZYclyEhRY6quNy1Vx6QcbIuvdkrQrWnFmfMf05A-sWXw_ZCs1Ugc2IOfp2CjwnO917D1EkgxIl39ekIjll5RtSqzwi7SKy2-Yc4emTrMpjOTjwFbrY8wFtSY84LHeJgwfDVU26fDxNtI7oWWC63HUMZcsihQpBYLAgTk4DiD35VeM2ZaQjNH3cLcypLhgpC9FcLbm8N1c78PXITF8ctPZNrVh7PlU9DyqxTbBk4UFfod34RMHYc1h56S0N9OUeLgevqLUdys6UsZ5qg'}
+      headers: {'Api-Version':'1.1','Authorization':'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwMDk4YmVmMC0zOThlNThmNS04MTllLTQ5ZTMtODgwYy1lNTdjZGEyOGY4MjYiLCJpYXQiOjE1NzQ1Nzg2NzYsImV4cCI6MTU3NDU4MDQ3Niwic3ViIjoic2JNZW13YXVucEJ5cFJMT0VZMiJ9.gsO5IB0Gf62fzY6DRIqaxtmMswdF4T_cAXT-CZe1rqVOwbd9rjtK6IEqPBxsEOc4D4Nn5kIjknTR_Wljn3HiDRWr633mjVVt8leY00NVUIi_FAIZpL6IlEq16W2Z6lYS7TBkQRgWHWT5KR9YNUi38kE1MGK1b8mZ4KQ7OAaBCOtFo1DFZP163FqMJx_XlUzm0_mvyMxdRTnw7_Me4vJ2KpHUJwKJpCP1leK0VKMwhLtOmipOfE9yJCOCYvPB0bdEKr_5zjOHij--H0VahaDxklSm4DG5Sg-eW78A2QZwIxpAqPH4nX_jY9F62w7hI49Z2ExNwbPAYDsqQktxKEn-qQ'}
    });
   }
 
   getUser(){
-    return this.httpClient.get('https://sandbox.api.yodlee.com/ysl/transactions');
+    return this.httpClient.get('http://172.20.44.4:5000/api/v1/users');
   }
 }
